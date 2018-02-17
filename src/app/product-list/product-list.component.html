@@ -1,0 +1,26 @@
+<button button class="btn btn-success" (click)="loadProducts()">Get products</button>
+
+<table class="table table-striped">
+  <thead class="thead-default" ></thead>
+  <!-- <label>Select category</label>
+  <select class="form-control" (change)="categoryChanged($event.target.value)">
+      <option *ngFor="let category of categories">{{category}}
+      </option>
+  </select> -->
+  <!-- <label>
+    Search <input class="form-control" [formControl]="searchMask">
+  </label> -->
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th colspan="3">Actions</th>
+  </tr>
+  <tr *ngFor="let product of products">
+    <td>{{product.Id}}</td>
+    <td>{{product.Name}}</td>
+    <td>{{product.Category.Name}}</td>
+    <td><button class="btn btn-warning" (click)="deleteProduct(product)">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button></td>
+  </tr>
+</table>
