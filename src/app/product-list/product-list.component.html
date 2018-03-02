@@ -1,26 +1,34 @@
-<button button class="btn btn-success" (click)="loadProducts()">Get products</button>
-
-<table class="table table-striped">
-  <thead class="thead-default" ></thead>
-  <!-- <label>Select category</label>
-  <select class="form-control" (change)="categoryChanged($event.target.value)">
-      <option *ngFor="let category of categories">{{category}}
-      </option>
-  </select> -->
-  <!-- <label>
-    Search <input class="form-control" [formControl]="searchMask">
-  </label> -->
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th colspan="3">Actions</th>
-  </tr>
-  <tr *ngFor="let product of products">
-    <td>{{product.Id}}</td>
-    <td>{{product.Name}}</td>
-    <td>{{product.Category.Name}}</td>
-    <td><button class="btn btn-warning" (click)="deleteProduct(product)">Edit</button></td>
-    <td><button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button></td>
-  </tr>
-</table>
+<!--<button button class="btn btn-success btn-sm-4" (click)="loadProducts()">Get products</button>-->
+<div class="table-responsive-sm">
+  <table class="table table-striped table-fit">
+    <thead class="thead-default"></thead>
+    <!-- <label>Select category</label>
+    <select class="form-control" (change)="categoryChanged($event.target.value)">
+        <option *ngFor="let category of categories">{{category}}
+        </option>
+    </select> -->
+    <!-- <label>
+      Search <input class="form-control" [formControl]="searchMask">
+    </label> -->
+    <tr scope="col" colspan="5" class="table borderless">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><button button class="btn btn-success btn-sm-4" (click)="createProduct()">New product</button></td>
+    </tr>
+    <tr>
+      <th scope="col" >Id</th>
+      <th scope="col" >Name</th>
+      <th scope="col" >Category</th>
+      <th scope="col" colspan="2" >Actions</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{product.Id}}</td>
+      <td>{{product.Name}}</td>
+      <td>{{product.Category.Name}}</td>
+      <td><button class="btn btn-warning" (click)="editProduct(product.Id)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button></td>
+    </tr>
+  </table>
+</div>

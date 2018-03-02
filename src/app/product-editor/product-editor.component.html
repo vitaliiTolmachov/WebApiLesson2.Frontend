@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <form [formGroup]="productForm" novalidate (ngSubmit)="onSubmit()" >
+    <div class="form-row col-sm-3">
+      <div class="form-group">
+        <label class="center-block">Name:
+          <input class="form-control" formControlName="Product" required
+                 (change)="productNameChanged($event.target.value)" >
+                 <!--[value]='productForm.get("Product").value.Name'-->
+        </label>
+      </div>
+    </div>
+  <div class="form-row col-sm-3">
+    <div class="form-group">
+      <label>Category:</label>
+      <select formControlName="Category" class="form-control custom-select" placeholder="Choose category">
+        <option *ngFor="let category of categories" [ngValue]="category">
+          {{category.Name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!productForm.valid" >Submit</button>
+    <button type="reset" class="btn btn-outline-info" (click)="returnToList()">Cancel</button>
+</form>
+  <pre>{{productForm.value | json}}</pre>
+</div>

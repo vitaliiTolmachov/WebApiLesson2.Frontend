@@ -5,4 +5,12 @@ export class Category {
     Name: string;
     DepartmentId: number;
     Department: Department;
+  /*constructor (
+    private id: number = null,
+    private name: string = null,
+    private departmentId: number = null,
+    private department: Department
+  ) {
+    this.department = new Department();
+  }*/
 }

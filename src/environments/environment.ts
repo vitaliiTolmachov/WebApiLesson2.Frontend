@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  productsApiUrl: "http://localhost:5001/api/product"
+  productsApiUrl: "http://localhost:5001/api/product",
+  categoryApiUrl: "http://localhost:5002/api/category"
 };

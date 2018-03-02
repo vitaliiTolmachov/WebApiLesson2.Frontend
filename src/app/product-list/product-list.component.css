@@ -1,1 +1,8 @@
-@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+.table-fit {
+  white-space: nowrap;
+  width: 1%;
+}
+.borderless td, .borderless th {
+  border: none;
+  background: white;
+}

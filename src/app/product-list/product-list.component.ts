@@ -14,12 +14,14 @@ export class ProductListComponent implements OnInit {
   constructor(private service: ProductService, private router: Router) { }
 
   ngOnInit() {
-
+    this.loadProducts();
   }
-
   loadProducts () {
     this.service.getAll().subscribe(
-       products => this.products = products,
+       incomingProducts => {
+         console.log(incomingProducts);
+         this.products = incomingProducts;
+       },
       (err) => console.error("error"),
       () => console.log("Done!"));
   }
@@ -29,5 +31,13 @@ export class ProductListComponent implements OnInit {
       data => this.loadProducts(),
       (err) => console.log("error"),
       () => console.log(product));
+  }
+
+  editProduct(Id: number) {
+    this.router.navigate(["products/edit", Id]);
+  }
+
+  createProduct() {
+    this.router.navigate(["products/create"]);
   }
 }
