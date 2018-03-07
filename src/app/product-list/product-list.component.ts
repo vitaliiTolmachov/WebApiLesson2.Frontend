@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct (product: Product) {
+    alert("Are you shore you whant to delete product?");
     this.service.deleteProduct(product.Id).subscribe(
       data => this.loadProducts(),
       (err) => console.log("error"),

@@ -3,24 +3,25 @@
     <div class="form-row col-sm-3">
       <div class="form-group">
         <label class="center-block">Name:
-          <input class="form-control" formControlName="Product" required
-                 (change)="productNameChanged($event.target.value)" >
-                 <!--[value]='productForm.get("Product").value.Name'-->
+          <input class="form-control" formControlName="ProductName" required
+                 (change)="productNameChanged($event.target.value)">
         </label>
       </div>
     </div>
   <div class="form-row col-sm-3">
     <div class="form-group">
       <label>Category:</label>
-      <select formControlName="Category" class="form-control custom-select" placeholder="Choose category">
-        <option *ngFor="let category of categories" [ngValue]="category">
+      <select formControlName="Category" class="form-control custom-select" (change)="categoryChanged($event.target.value)">
+        <option *ngFor="let category of categories"
+                [value]="category.Name"
+                [attr.selected]= "this.productForm.get('Category').value.Name === category.Name ? true : null">
           {{category.Name}}
         </option>
       </select>
     </div>
   </div>
-  <button type="submit" class="btn btn-success" [disabled]="!productForm.valid" >Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="!productForm.get('Category').dirty || productForm.valid" >Submit</button>
     <button type="reset" class="btn btn-outline-info" (click)="returnToList()">Cancel</button>
 </form>
-  <pre>{{productForm.value | json}}</pre>
+  <pre>{{productForm.value | json}} {{productForm.status}} {{productForm.get("Category").dirty}} {{productForm.get("Category").pristine}}</pre>
 </div>

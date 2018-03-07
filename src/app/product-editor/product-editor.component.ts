@@ -33,27 +33,20 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initProductForm();
+    this.initCategoryList();
     this.initProductId();
     this.initProduct();
-    this.initCategoryList();
   }
   private initProductForm() {
     this.productForm = this.formBuilder.group(
       {
         Product: [{}, Validators.required],
+        ProductName: ["", Validators.required],
         Category: [{}, Validators.required]
       });
-
-    /*this.productForm = new FormGroup(
-      {
-        ProductId: new FormControl(this.product.Id, [Validators.required]),
-        ProductName: new FormControl(this.product.Name, [Validators.required]),
-        CategoryId: new FormControl(this.product.Category.Id, [Validators.required]),
-        Category: new FormControl(this.product.Category, [Validators.required]),
-      });*/
   }
   onSubmit() {
-    const subscription = this.productService.updateProduct(this.productForm.value)
+    const subscription = this.productService.updateProduct(this.productForm.get("Product").value)
       .subscribe(
         value => {
           console.log(value);
@@ -67,41 +60,33 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
       const subscription = this.productService.getProduct(this.productId)
         .subscribe(
           (inProduct: Product) => {
-            /*            console.log(`Product get OK/${JSON.stringify(inProduct)}`);*/
-          this.product = inProduct;
           this.setProductToForm(inProduct);
-          this.setProductCategoryToForm(inProduct.Category);
         });
       this.subscriptions.push(subscription);
     } else {
-      this.setProductToForm(new Product());
-      this.initCategoryList();
+      this.product = new Product();
+      this.setProductToForm(this.product);
     }
   }
 
   private initCategoryList() {
     const subscription = this.categoryService.getAll().subscribe(
       inCategories => {
-        /*console.log(`Categories get OK/${JSON.stringify(inCategories)}`);*/
         this.categories = inCategories;
       });
-    this.subscriptions.push(subscription);
-  }
-
-  private setProductCategoryToForm(category: Category) {
-    this.productForm.patchValue({
-      Category: category
-    });
   }
 
   private setProductToForm(product: Product) {
-    this.productForm.patchValue({
+    this.product = product;
+    this.productForm.setValue({
       Product: {
-        Id: "",
-        Name: "",
-        CategoryId: "",
-        Category: {}
-      }
+        Id: product.Id,
+        Name: product.Name,
+        CategoryId: product.Category.Id,
+        Category: product.Category
+      },
+      ProductName: product.Name,
+      Category: product.Category
     });
   }
 
@@ -113,6 +98,13 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
     this.productId = +this.route.snapshot.params["id"];
   }
 
-  productNameChanged(value) {
-    console.log(value);
+  productNameChanged(productName: string) {
+    this.productForm.get("Product").value.Name = productName;
+  }
+
+  categoryChanged(categoryName) {
+    const category = this.categories.filter(cat => cat.Name === categoryName)[0];
+    if (category) {
+      this.productForm.get("Product").value.Category = category;
+  }
 }

@@ -1,16 +1,12 @@
 import { Department } from "./department.module";
 
 export class Category {
-    Id: number;
-    Name: string;
-    DepartmentId: number;
-    Department: Department;
-  /*constructor (
-    private id: number = null,
-    private name: string = null,
-    private departmentId: number = null,
-    private department: Department
-  ) {
-    this.department = new Department();
+    Id?: Number = 0;
+    Name: String = "";
+    DepartmentId: Number = 0;
+    Department: Department = new Department();
+
+  /*constructor (categories?: Category) {
+    Object.assign(this, categories);
   }*/
 }
