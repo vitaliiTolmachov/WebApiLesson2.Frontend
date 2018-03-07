@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy } from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "../shared/product.module";
-import {ProductService} from "../shared/services/product.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Category} from "../shared/category.module";
-import {CategoryService} from "../shared/services/category.service";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Product } from "../shared/models/product.model";
+import { ProductService } from "../shared/services/product.service";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Category } from "../shared/models/category.model";
+import { CategoryService } from "../shared/services/category.service";
 import { ISubscription } from "rxjs/Subscription";
 
 @Component({
@@ -60,8 +60,8 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
       const subscription = this.productService.getProduct(this.productId)
         .subscribe(
           (inProduct: Product) => {
-          this.setProductToForm(inProduct);
-        });
+            this.setProductToForm(inProduct);
+          });
       this.subscriptions.push(subscription);
     } else {
       this.product = new Product();
@@ -106,5 +106,6 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
     const category = this.categories.filter(cat => cat.Name === categoryName)[0];
     if (category) {
       this.productForm.get("Product").value.Category = category;
+    }
   }
 }

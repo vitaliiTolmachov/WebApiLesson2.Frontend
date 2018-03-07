@@ -1,10 +1,10 @@
-import { Category } from "./category.module";
+import { Category } from "./category.model";
 
 
 export class Product {
-    Id: Number = 0;
+    Id: number;
     Name: String = "";
-    CategoryId: Number = 0;
+    CategoryId: number;
     Category: Category = new Category();
 
     /*constructor ( products?: Product) {
